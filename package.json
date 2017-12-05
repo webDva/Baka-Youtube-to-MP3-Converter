@@ -11,6 +11,10 @@
     "author": "jeast",
     "contributors": [],
     "dependencies": {
+        "body-parser": "^1.18.2",
+        "cors": "^2.8.4",
+        "express": "^4.16.2",
+        "path": "^0.12.7",
         "youtube-mp3-downloader": "^0.5.1"
     }
 }
