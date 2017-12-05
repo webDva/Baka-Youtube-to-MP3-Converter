@@ -1,8 +1,16 @@
 {
     "name": "YoutubeMP3",
     "version": "1.0.0",
-    "keywords": ["util", "functional", "server", "client", "browser"],
+    "keywords": [
+        "util",
+        "functional",
+        "server",
+        "client",
+        "browser"
+    ],
     "author": "jeast",
     "contributors": [],
-    "dependencies": {}
+    "dependencies": {
+        "youtube-mp3-downloader": "^0.5.1"
+    }
 }
