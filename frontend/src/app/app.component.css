@@ -1,0 +1,10 @@
+#value {
+    width: 33%;
+    height: 100%;
+    margin: 0 auto;
+    
+    color: white;
+    font-size: 3em;
+    
+    background-color: cornflowerblue;   
+}
