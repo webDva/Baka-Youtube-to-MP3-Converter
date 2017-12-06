@@ -8,6 +8,11 @@
         "client",
         "browser"
     ],
+    "scripts": {
+        "start": "node main.js",
+        "start debug": "node --inspect --debug-brk main.js",
+        "start debug no break": "node --inspect main.js"
+    },
     "author": "jeast",
     "contributors": [],
     "dependencies": {
