@@ -8,13 +8,14 @@ let YoutubeMp3Downloader = require("youtube-mp3-downloader");
 //Configure YoutubeMp3Downloader with your settings
 let YD = new YoutubeMp3Downloader({
     "ffmpegPath": "ffmpeg.exe", // Where is the FFmpeg binary located?
-    "outputPath": "./", // Where should the downloaded and encoded files be stored?
+    "outputPath": "videos", // Where should the downloaded and encoded files be stored?
     "youtubeVideoQuality": "highest", // What video quality should be used?
     "queueParallelism": 2, // How many parallel downloads/encodes should be started?
     "progressTimeout": 2000                 // How long should be the interval of the progress reports
 });
 
-YD.on("finished", function (err, data) {
+YD.on("finished", function (err, data) {   
+    videos.videoId = data.file;
     console.log(JSON.stringify(data));
 });
 
@@ -41,8 +42,14 @@ app.set('port', port);
 
 // convert youtube video to mp3
 
+let videos = {};
+
 app.post('/convert/:videoId', (req, res) => {
     YD.download(req.params.videoId);
+});
+
+app.get('/download/:videoId', (req,res) => {
+    res.download(videos[req.params.videoId]);
 });
 
 /*

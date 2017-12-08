@@ -9,11 +9,15 @@ import {HttpClient} from '@angular/common/http';
 })
 export class AppComponent {
     x = 'あい';
+    response = '';
 
     convert(videoURL: string) {
         let match = videoURL.split("watch?v=")[1];
         this.http.post('http://localhost:3000/convert/' + match, {}).subscribe(data => {
-
+            this.response = "converting...";
+        });
+        this.http.get('http://localhost:3000/download/' + match).subscribe(data => {
+            this.response = 'done!';
         });
     }
 
