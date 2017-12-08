@@ -75,10 +75,7 @@ let videos = [];
 
 app.post('/convert/:videoId', (req, res) => {
     downloader.getMP3(req.params.videoId, (err, result) => {
-        let path = result.file;
-        let match = path.split("videos/")[1];
-        videos.push(match);
-        res.send({'path': match});
+        res.sendFile(result.file,{root: __dirname});
     });
 });
 
