@@ -2,4 +2,8 @@
     Youtube video URL <input #box (keyup.enter)="convert(box.value)">
     <button (click)="convert(box.value)">Convert this thingy!</button>
     {{response}}
+    <br>
+    <audio controls>
+        <source src="{{audio_file}} type="audio/mpeg">
+    </audio>
 </div>

@@ -69,12 +69,21 @@ app.use(bodyParser.urlencoded({extended: true}));
 const port = process.env.PORT || '3000';
 app.set('port', port);
 
+let videos = [];
+
 // convert youtube video to mp3
 
 app.post('/convert/:videoId', (req, res) => {
     downloader.getMP3(req.params.videoId, (err, result) => {
-        res.download(result.file);
+        let path = result.file;
+        let match = path.split("videos/")[1];
+        videos.push(match);
+        res.send({'path': match});
     });
+});
+
+app.get('/download/:file', (req,res) => {
+    res.sendFile(req.params.file, {root: __dirname + '/videos/'});
 });
 
 /*
