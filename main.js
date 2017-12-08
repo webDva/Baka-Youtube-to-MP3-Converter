@@ -5,27 +5,56 @@ let bodyParser = require('body-parser');
 
 let YoutubeMp3Downloader = require("youtube-mp3-downloader");
 
-//Configure YoutubeMp3Downloader with your settings
-let YD = new YoutubeMp3Downloader({
-    "ffmpegPath": "ffmpeg.exe", // Where is the FFmpeg binary located?
-    "outputPath": "videos", // Where should the downloaded and encoded files be stored?
-    "youtubeVideoQuality": "highest", // What video quality should be used?
-    "queueParallelism": 2, // How many parallel downloads/encodes should be started?
-    "progressTimeout": 2000                 // How long should be the interval of the progress reports
-});
+let Downloader = function () {
 
-YD.on("finished", function (err, data) {   
-    videos.videoId = data.file;
-    console.log(JSON.stringify(data));
-});
+    let self = this;
 
-YD.on("error", function (error) {
-    console.log(error);
-});
+    //Configure YoutubeMp3Downloader with your settings
+    self.YD = new YoutubeMp3Downloader({
+        "ffmpegPath": "ffmpeg.exe", // Where is the FFmpeg binary located?
+        "outputPath": "videos", // Where should the downloaded and encoded files be stored?
+        "youtubeVideoQuality": "highest", // What video quality should be used?
+        "queueParallelism": 2, // How many parallel downloads/encodes should be started?
+        "progressTimeout": 2000                 // How long should be the interval of the progress reports
+    });
 
-YD.on("progress", function (progress) {
-    console.log(JSON.stringify(progress));
-});
+    self.callbacks = {};
+
+    self.YD.on("finished", function (error, data) {
+
+        if (self.callbacks[data.videoId]) {
+            self.callbacks[data.videoId](error, data);
+        } else {
+            console.log("Error: No callback for videoId!");
+        }
+
+    });
+
+    self.YD.on("error", function (error, data) {
+
+        console.error(error + " on videoId " + data.videoId);
+
+        if (self.callbacks[data.videoId]) {
+            self.callbacks[data.videoId](error, data);
+        } else {
+            console.log("Error: No callback for videoId!");
+        }
+
+    });
+};
+
+Downloader.prototype.getMP3 = function (videoId, callback) {
+
+    var self = this;
+
+    // Register callback
+    self.callbacks[videoId] = callback;
+    // Trigger download
+    self.YD.download(videoId);
+
+};
+
+let downloader = new Downloader();
 
 /*
  * API Server
@@ -42,14 +71,10 @@ app.set('port', port);
 
 // convert youtube video to mp3
 
-let videos = {};
-
 app.post('/convert/:videoId', (req, res) => {
-    YD.download(req.params.videoId);
-});
-
-app.get('/download/:videoId', (req,res) => {
-    res.download(videos[req.params.videoId]);
+    downloader.getMP3(req.params.videoId, (err, result) => {
+        res.download(result.file);
+    });
 });
 
 /*

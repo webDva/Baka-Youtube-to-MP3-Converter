@@ -13,10 +13,8 @@ export class AppComponent {
 
     convert(videoURL: string) {
         let match = videoURL.split("watch?v=")[1];
+        this.response = "converting...";
         this.http.post('http://localhost:3000/convert/' + match, {}).subscribe(data => {
-            this.response = "converting...";
-        });
-        this.http.get('http://localhost:3000/download/' + match).subscribe(data => {
             this.response = 'done!';
         });
     }
