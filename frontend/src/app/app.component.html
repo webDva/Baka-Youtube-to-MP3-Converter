@@ -3,5 +3,5 @@
     <button (click)="convert(box.value)">Convert this thingy!</button>
     {{response}}
     <br>
-    <a [href]="audio_file" download>Baka, here!</a>
+    <button (click)="download(mp3Data.file)" [disabled]="!mp3Data">Download, baka!</button>
 </div>

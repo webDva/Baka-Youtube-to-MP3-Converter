@@ -75,11 +75,12 @@ let videos = [];
 
 app.post('/convert/:videoId', (req, res) => {
     downloader.getMP3(req.params.videoId, (err, result) => {
-        res.sendFile(result.file,{root: __dirname});
+        res.send(result);
+        //res.sendFile(result.file,{root: __dirname});
     });
 });
 
-app.get('/download/:file', (req,res) => {
+app.get('/download/:file', (req, res) => {
     res.sendFile(req.params.file, {root: __dirname + '/videos/'});
 });
 
