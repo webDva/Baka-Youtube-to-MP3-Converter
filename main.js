@@ -32,6 +32,7 @@ let Downloader = function () {
 
     self.YD.on("error", function (error, data) {
 
+        // remove this in production/on launch
         console.error(error + " on videoId " + data.videoId);
 
         if (self.callbacks[data.videoId]) {
@@ -75,8 +76,11 @@ let videos = [];
 
 app.post('/convert/:videoId', (req, res) => {
     downloader.getMP3(req.params.videoId, (err, result) => {
-        res.send(result);
-        //res.sendFile(result.file,{root: __dirname});
+        if (err) {
+            res.send({'failed': true});
+        } else {
+            res.send(result);
+        }
     });
 });
 

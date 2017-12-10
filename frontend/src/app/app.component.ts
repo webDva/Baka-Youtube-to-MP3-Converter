@@ -21,8 +21,13 @@ export class AppComponent {
         let match = videoURL.split("watch?v=")[1];
         this.response = "converting...";
         this.http.post('http://localhost:3000/convert/' + match, null).subscribe(data => {
-            this.mp3Data = data;
-            this.response = 'done!';
+            if (data['failed']) {
+                this.response = 'failed!';
+            }
+            else {
+                this.mp3Data = data;
+                this.response = 'done!';
+            }
         });
     }
 
