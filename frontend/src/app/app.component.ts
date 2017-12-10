@@ -1,8 +1,6 @@
 import {Component} from '@angular/core';
 
 import {HttpClient} from '@angular/common/http';
-import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
-import {ResponseContentType} from '@angular/http';
 
 import * as FileSaver from 'file-saver';
 
@@ -12,9 +10,7 @@ import * as FileSaver from 'file-saver';
     styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-    x = 'あい';
     response = '';
-    audio_file: SafeUrl = '';
     mp3Data;
 
     convert(videoURL: string) {
@@ -38,5 +34,5 @@ export class AppComponent {
         });
     }
 
-    constructor(private http: HttpClient, private sanitzer: DomSanitizer) {}
+    constructor(private http: HttpClient) {}
 }

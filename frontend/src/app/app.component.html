@@ -1,6 +1,8 @@
 <div id="value">
     Youtube video URL <input #box (keyup.enter)="convert(box.value)">
+    <br>
     <button (click)="convert(box.value)">Convert this thingy!</button>
+    <br>
     {{response}}
     <br>
     <button (click)="download(mp3Data.file)" [disabled]="!mp3Data">Download, baka!</button>
