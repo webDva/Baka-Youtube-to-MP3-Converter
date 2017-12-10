@@ -76,10 +76,12 @@ let videos = [];
 
 app.post('/convert/:videoId', (req, res) => {
     downloader.getMP3(req.params.videoId, (err, result) => {
-        if (err) {
-            res.send({'failed': true});
-        } else {
-            res.send(result);
+        if (!res.headersSent) {
+            if (err) {
+                res.send({'failed': true});
+            } else {
+                res.send(result);
+            }
         }
     });
 });
