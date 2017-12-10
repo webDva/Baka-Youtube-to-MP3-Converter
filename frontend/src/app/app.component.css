@@ -1,10 +1,51 @@
 #value {
+    overflow: hidden;
+    padding: 0;
     width: 40%;
     height: 100%;
     margin: 0 auto;
     
     color: white;
-    font-size: 3em;
+    /*font-size: 3em;*/
     
     background-color: cornflowerblue;   
+}
+
+#urlBox {
+    margin: 1px auto;
+    margin-top: 30%;
+    width: 90%;
+    caret-color: cornflowerblue;
+    font-size: 1.5em;
+}
+
+button {
+    margin: 4px auto;
+}
+
+#convertButton {
+    margin: 4px auto;
+    padding: 13px;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: white;
+    background-color: #FF7F50;
+    border: solid 3px #e57248;
+    border-radius: 28px;
+}
+
+#downloadButton {
+    
+}
+
+p {
+    margin: 0 auto;
+    font-size: 3em;
+}
+
+.flexboxMe {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;    
 }

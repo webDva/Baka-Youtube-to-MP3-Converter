@@ -1,9 +1,8 @@
 <div id="value">
-    Youtube video URL <input #box (keyup.enter)="convert(box.value)">
-    <br>
-    <button (click)="convert(box.value)">Convert this thingy!</button>
-    <br>
+    <p>Baka Youtube-to-MP3 converter!</p>
+    <p>🍩＼(★^∀^★)／🍩</p>
+    <input id="urlBox" class="flexboxMe" autofocus type="text" #box (keyup.enter)="convert(box.value)" placeholder="Youtube video URL...">
+    <button id="convertButton" class="flexboxMe" (click)="convert(box.value)">Convert this thingy!</button>
     {{response}}
-    <br>
-    <button (click)="download(mp3Data.file)" [disabled]="!mp3Data">Download, baka!</button>
+    <button id="downloadButton" class="flexboxMe" (click)="download(mp3Data.file)" [disabled]="!mp3Data">Download, baka!</button>
 </div>
