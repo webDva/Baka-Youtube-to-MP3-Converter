@@ -12,9 +12,7 @@
     "scripts": {
         "start": "node main.js",
         "start debug": "node --inspect --debug-brk main.js",
-        "start debug no break": "node --inspect main.js",
-        "preinstall": "npm install",
-        "postinstall": "cd frontend && ng build --aot=false --prod"
+        "start debug no break": "node --inspect main.js"
     },
     "engines": {
         "node": "6.9.4",
