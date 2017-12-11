@@ -4,5 +4,5 @@
     <input id="urlBox" class="flexboxMe" autofocus type="text" #box (keyup.enter)="convert(box.value)" placeholder="video url, e.g., https://www.youtube.com/watch?v=gvdf5n-zI14">
     <button id="convertButton" class="flexboxMe" (click)="convert(box.value)">Convert this thingy!</button>
     <p>{{response}}</p>
-    <button id="downloadButton" class="flexboxMe" (click)="download(mp3Data.file)" [disabled]="!mp3Data">Download, baka!</button>
+    <button *ngIf="mp3Data" id="downloadButton" class="flexboxMe" (click)="download(mp3Data.file)" [disabled]="!mp3Data">Download, baka!</button>
 </div>

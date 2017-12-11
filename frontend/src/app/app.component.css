@@ -1,5 +1,4 @@
 #value {
-    overflow: hidden;
     padding: 0;
     width: 40%;
     height: 100%;
@@ -36,12 +35,20 @@ button {
 }
 
 #downloadButton {
-    
+    margin: 4px auto;
+    padding: 6px;
+    font-size: 2em;
+    font-weight: bolder;
+    color: white;
+    background-color: #32CD32;
+    border: solid 3px #228B22;
+    border-radius: 28px;
 }
 
 p {
     margin: 0 auto;
-    font-size: 3em;
+    font-size: 1.5em;
+    text-align: center;
 }
 
 .flexboxMe {
@@ -49,4 +56,14 @@ p {
     flex-direction: column;
     justify-content: center;
     align-items: center;    
+}
+
+@media (max-width: 700px) {
+    #value {
+        width: 100%;
+    }
+    
+    p {
+        font-size: 2.45em;
+    }
 }
