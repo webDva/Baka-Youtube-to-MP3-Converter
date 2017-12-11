@@ -1,6 +1,7 @@
 {
     "name": "YoutubeMP3",
     "version": "1.0.0",
+    "main": "main.js",
     "keywords": [
         "util",
         "functional",
@@ -11,7 +12,12 @@
     "scripts": {
         "start": "node main.js",
         "start debug": "node --inspect --debug-brk main.js",
-        "start debug no break": "node --inspect main.js"
+        "start debug no break": "node --inspect main.js",
+        "postinstall": "cd frontend && ng build --aot -prod"
+    },
+    "engines": {
+        "node": "6.9.4",
+        "npm": "5.6.0"
     },
     "author": "jeast",
     "contributors": [],
