@@ -1,6 +1,6 @@
-import {Component} from '@angular/core';
-
+import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {environment} from '../environments/environment';
 
 import * as FileSaver from 'file-saver';
 
@@ -9,14 +9,16 @@ import * as FileSaver from 'file-saver';
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
     response = '';
     mp3Data;
+
+    baseUrl = '';
 
     convert(videoURL: string) {
         let match = videoURL.split("watch?v=")[1];
         this.response = "converting...";
-        this.http.post('http://localhost:3000/convert/' + match, null).subscribe(data => {
+        this.http.post(this.baseUrl + '/convert/' + match, null).subscribe(data => {
             if (data['failed']) {
                 this.response = 'failed!';
             }
@@ -28,11 +30,17 @@ export class AppComponent {
     }
 
     download(fileName: string) {
-        this.http.get('http://localhost:3000/download/' + fileName.split("videos/")[1], {responseType: 'blob'}).subscribe(data => {
+        this.http.get(this.baseUrl + '/download/' + fileName.split("videos/")[1], {responseType: 'blob'}).subscribe(data => {
             let blob = new Blob([data], {type: 'audio/mpeg'});
             FileSaver.saveAs(blob, this.mp3Data.videoTitle + '.mp3');
         });
     }
 
     constructor(private http: HttpClient) {}
+
+    ngOnInit() {
+        if (!environment.production) {
+            this.baseUrl = 'http://localhost:3000';
+        }
+    }
 }
