@@ -22,7 +22,7 @@ export class AppComponent {
             }
             else {
                 this.mp3Data = data;
-                this.response = 'done!';
+                this.response = this.mp3Data.videoTitle + ' is ready for download, baka!';
             }
         });
     }
