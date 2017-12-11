@@ -17,14 +17,14 @@ export class AppComponent implements OnInit {
 
     convert(videoURL: string) {
         let match = videoURL.split("watch?v=")[1];
-        this.response = "Converting your video...";
+        this.response = "Converting your video... baka!";
         this.http.post(this.baseUrl + '/convert/' + match, null).subscribe(data => {
             if (data['failed']) {
-                this.response = 'Failed to convert your video!';
+                this.response = 'Failed to convert your video! Baka!';
             }
             else {
                 this.mp3Data = data;
-                this.response = this.mp3Data.videoTitle + ' can be downloaded, baka!';
+                this.response = this.mp3Data.videoTitle + ' has been converted, baka!';
             }
         });
     }
