@@ -13,6 +13,7 @@
         "start": "node main.js",
         "start debug": "node --inspect --debug-brk main.js",
         "start debug no break": "node --inspect main.js",
+        "preinstall": "npm install -g @angular/cli@1.0.4",
         "postinstall": "cd frontend && ng build --aot=false --prod"
     },
     "engines": {
