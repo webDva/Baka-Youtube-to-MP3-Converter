@@ -13,7 +13,7 @@
         "start": "node main.js",
         "start debug": "node --inspect --debug-brk main.js",
         "start debug no break": "node --inspect main.js",
-        "postinstall": "cd frontend && ng build --aot -prod"
+        "postinstall": "cd frontend && ng build --aot=false --prod"
     },
     "engines": {
         "node": "6.9.4",
