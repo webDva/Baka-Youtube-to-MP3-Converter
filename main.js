@@ -11,7 +11,7 @@ let Downloader = function () {
 
     //Configure YoutubeMp3Downloader with your settings
     self.YD = new YoutubeMp3Downloader({
-        "ffmpegPath": "ffmpeg.exe", // Where is the FFmpeg binary located?
+        "ffmpegPath": "/app/.ffmpeg", // Where is the FFmpeg binary located?
         "outputPath": "videos", // Where should the downloaded and encoded files be stored?
         "youtubeVideoQuality": "highest", // What video quality should be used?
         "queueParallelism": 2, // How many parallel downloads/encodes should be started?
