@@ -33,7 +33,7 @@ let Downloader = function () {
     self.YD.on("error", function (error, data) {
 
         // remove this in production/on launch
-        console.error(error + " on videoId " + data.videoId);
+        //console.error(error + " on videoId " + data.videoId);
 
         if (self.callbacks[data.videoId]) {
             self.callbacks[data.videoId](error, data);
