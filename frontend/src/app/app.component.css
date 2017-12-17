@@ -10,6 +10,18 @@
     background-color: cornflowerblue;   
 }
 
+.site-head {
+    padding: 1.4rem 2rem;
+    text-align: center;
+    margin-top: 6rem;
+    display: inline-block;
+}
+
+.site-head .title {
+    position: relative;
+    display: inline-block;
+}
+
 #urlBox {
     margin: 1px auto;
     margin-top: 40px;
@@ -24,14 +36,20 @@ button {
 }
 
 #convertButton {
-    margin: 4px auto;
+    margin: 1em auto;
     padding: 13px;
     font-size: 1.1em;
     font-weight: bold;
     color: white;
     background-color: #FF7F50;
     border: solid 3px #e57248;
-    border-radius: 28px;
+    border-radius: 4px;
+    transition-duration: 0.5s;
+}
+
+#convertButton:hover {
+    border: solid 3px chartreuse;
+    background-color: #4CAF50;
 }
 
 #downloadButton {
