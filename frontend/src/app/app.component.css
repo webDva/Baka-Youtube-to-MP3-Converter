@@ -1,32 +1,20 @@
-#value {
-    padding: 0;
-    width: 40%;
-    min-height: 100%;
-    margin: 0 auto;
-    
-    color: white;
-    /*font-size: 3em;*/
-    
-    background-color: cornflowerblue;
-}
-
 .site-head {
     padding: 1.4rem 2rem;
     text-align: center;
     margin-top: 6rem;
-    display: inline-block;
     font-family: Verdana;
 }
 
 .site-head .title {
     position: relative;
     display: inline-block;
+    font-weight: 800;
 }
 
-#urlBox {
+input {
     margin: 1px auto;
     margin-top: 40px;
-    width: 90%;
+    width: 60%;
     height: 3em;
     caret-color: cornflowerblue;
     size: 1em;
@@ -36,12 +24,8 @@
 }
 
 button {
-    margin: 4px auto;
-    cursor: pointer;
-}
-
-#convertButton {
-    margin: 1em auto;
+    cursor: pointer;    
+    margin: 1.2em auto;
     padding: 13px;
     font-size: 1.1em;
     font-weight: bold;
@@ -52,26 +36,15 @@ button {
     transition-duration: 0.5s;
 }
 
-#convertButton:hover {
+button:hover {
     border: solid 3px chartreuse;
     background-color: #4CAF50;
 }
 
-#convertButton:active {
+button:active {
     background-color: cadetblue;
     border-color: darkslateblue;
     transition-duration: 0s;
-}
-
-#downloadButton {
-    margin: 4px auto;
-    padding: 6px;
-    font-size: 2em;
-    font-weight: bolder;
-    color: white;
-    background-color: #32CD32;
-    border: solid 3px #228B22;
-    border-radius: 28px;
 }
 
 p {
@@ -83,6 +56,7 @@ p {
 .results {
     font-size: 2em;
     font-family: monospace;
+    margin-bottom: 3em;
 }
 
 .flexboxMe {
@@ -93,11 +67,7 @@ p {
 }
 
 @media (max-width: 700px) {
-    #value {
-        width: 100%;
-    }
-    
-    p {
-        font-size: 2.45em;
+    input {
+        width: 80%;
     }
 }

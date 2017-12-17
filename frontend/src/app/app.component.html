@@ -1,9 +1,7 @@
-<div id="value">
-    <header class="site-head">
-        <h1 class="h2 title">Baka Youtube to MP3 Converter!</h1>
-        <p>🍩 Make an .mp3 from a Youtube video! 🍩</p>
-    </header>
-    <input id="urlBox" class="flexboxMe" autofocus type="text" #box (keyup.enter)="convert(box.value)" placeholder="video url, e.g., https://www.youtube.com/watch?v=gvdf5n-zI14">
-    <button id="convertButton" class="flexboxMe" (click)="convert(box.value)">Download</button>
-    <p class="flexboxMe results">{{response}}</p>
-</div>
+<header class="site-head">
+    <h1 class="title">Baka Youtube to MP3 Converter!</h1>
+    <p>🍩 Make an .mp3 from a Youtube video! 🍩</p>
+</header>
+<input class="flexboxMe" autofocus type="text" #box (keyup.enter)="convert(box.value)" placeholder="video url, e.g., https://www.youtube.com/watch?v=gvdf5n-zI14">
+<button class="flexboxMe" (click)="convert(box.value)">Download</button>
+<p class="flexboxMe results">{{response}}</p>
