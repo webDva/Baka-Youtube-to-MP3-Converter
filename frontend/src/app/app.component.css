@@ -33,6 +33,7 @@
 
 button {
     margin: 4px auto;
+    cursor: pointer;
 }
 
 #convertButton {
@@ -50,6 +51,12 @@ button {
 #convertButton:hover {
     border: solid 3px chartreuse;
     background-color: #4CAF50;
+}
+
+#convertButton:active {
+    background-color: cadetblue;
+    border-color: darkslateblue;
+    transition-duration: 0s;
 }
 
 #downloadButton {
