@@ -1,11 +1,9 @@
 <div id="value">
     <header class="site-head">
         <h1 class="h2 title">Baka Youtube to MP3 Converter!</h1>
-        <p>Make an .mp3 from a Youtube video!</p>
-        <p>🍩＼(★^∀^★)／🍩</p>
+        <p>🍩 Make an .mp3 from a Youtube video! 🍩</p>
     </header>
     <input id="urlBox" class="flexboxMe" autofocus type="text" #box (keyup.enter)="convert(box.value)" placeholder="video url, e.g., https://www.youtube.com/watch?v=gvdf5n-zI14">
-    <button id="convertButton" class="flexboxMe" (click)="convert(box.value)">Convert this thingy!</button>
-    <p>{{response}}</p>
-    <button *ngIf="mp3Data" id="downloadButton" class="flexboxMe" (click)="download(mp3Data.file)" [disabled]="!mp3Data">Download</button>
+    <button id="convertButton" class="flexboxMe" (click)="convert(box.value)">Download</button>
+    <p class="flexboxMe results">{{response}}</p>
 </div>

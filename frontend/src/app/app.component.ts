@@ -12,7 +12,7 @@ import * as FileSaver from 'file-saver';
     styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-    response = '';
+    response = 'Ready for conversion, senpai!';
     mp3Data;
 
     baseUrl = '';
@@ -26,7 +26,8 @@ export class AppComponent implements OnInit {
             }
             else {
                 this.mp3Data = data;
-                this.response = this.mp3Data.videoTitle + ' has been converted, baka!';
+                this.response = this.mp3Data.videoTitle + ' has been converted into an .mp3, baka! Downloading right now...';
+                this.download(this.mp3Data.file);
             }
         });
     }
@@ -35,6 +36,7 @@ export class AppComponent implements OnInit {
         this.http.get(this.baseUrl + '/download/' + fileName.split("videos/")[1], {responseType: 'blob'}).subscribe(data => {
             let blob = new Blob([data], {type: 'audio/mpeg'});
             FileSaver.saveAs(blob, this.mp3Data.videoTitle + '.mp3');
+            this.response = "Done! Ready for another, baka!"
         });
     }
 

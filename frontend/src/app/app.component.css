@@ -1,13 +1,13 @@
 #value {
     padding: 0;
     width: 40%;
-    height: 100%;
+    min-height: 100%;
     margin: 0 auto;
     
     color: white;
     /*font-size: 3em;*/
     
-    background-color: cornflowerblue;   
+    background-color: cornflowerblue;
 }
 
 .site-head {
@@ -15,6 +15,7 @@
     text-align: center;
     margin-top: 6rem;
     display: inline-block;
+    font-family: Verdana;
 }
 
 .site-head .title {
@@ -29,6 +30,9 @@
     height: 3em;
     caret-color: cornflowerblue;
     size: 1em;
+    padding: 0.8em;
+    border: solid transparent;
+    border-radius: 6px;
 }
 
 button {
@@ -74,6 +78,11 @@ p {
     margin: 0 auto;
     font-size: 1.5em;
     text-align: center;
+}
+
+.results {
+    font-size: 2em;
+    font-family: monospace;
 }
 
 .flexboxMe {
