@@ -6,6 +6,21 @@ let fs = require('fs');
 
 let YoutubeMp3Downloader = require("youtube-mp3-downloader");
 
+// First, delete all files in the videos directory except the .gitignore file
+fs.readdir('videos', function (err, files) {
+    if (err)
+        throw err;
+
+    for (const file of files) {
+        if (file === '.gitignore')
+            continue;
+        fs.unlink(path.join('videos', file), function (err) {
+            if (err)
+                throw err;
+        });
+    }
+});
+
 let Downloader = function () {
 
     let self = this;
