@@ -2,6 +2,7 @@ let express = require('express');
 let cors = require('cors');
 let path = require('path');
 let bodyParser = require('body-parser');
+let fs = require('fs');
 
 let YoutubeMp3Downloader = require("youtube-mp3-downloader");
 
@@ -87,7 +88,10 @@ app.post('/convert/:videoId', (req, res) => {
 });
 
 app.get('/download/:file', (req, res) => {
-    res.sendFile(req.params.file, {root: __dirname + '/videos/'});
+    res.sendFile(req.params.file, {root: __dirname + '/videos/'}, function (err) {
+        // delete file once done to conserve space
+        fs.unlinkSync(__dirname + '/videos/' + req.params.file);
+    });
 });
 
 /*
