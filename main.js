@@ -127,5 +127,5 @@ app.listen(port, (errorThatOccurs) => {
         return console.log('Something bad happened.', errorThatOccurs);
     }
 
-    console.log(`Server running on localhost:${port}`);
+    console.log(`Server running on port ${port}`);
 });

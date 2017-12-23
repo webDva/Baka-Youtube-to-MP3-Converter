@@ -29,6 +29,9 @@ export class AppComponent implements OnInit {
                 this.response = this.mp3Data.videoTitle + ' has been converted into an .mp3, baka! Downloading right now...';
                 this.download(this.mp3Data.file);
             }
+        },
+        err => {
+            this.response = "Something bad happened! Couldn't convert this video!";
         });
     }
 
@@ -37,6 +40,9 @@ export class AppComponent implements OnInit {
             let blob = new Blob([data], {type: 'audio/mpeg'});
             FileSaver.saveAs(blob, this.mp3Data.videoTitle + '.mp3');
             this.response = "Done! Ready for another, baka!"
+        },
+        err => {
+            this.response = "Couldn't download your video! Baka!";
         });
     }
 
