@@ -4,4 +4,8 @@
 </header>
 <input class="flexboxMe" autofocus type="text" #box (keyup.enter)="convert(box.value)" placeholder="video url, e.g., https://www.youtube.com/watch?v=gvdf5n-zI14">
 <button class="flexboxMe" (click)="convert(box.value)">Download</button>
-<p class="flexboxMe results">{{response}}</p>
+
+<div class="flexboxMe results popup">
+    <span class='popuptext' id='message'>{{response}}</span>
+    <div class='loader' id='loading'></div>
+</div>
