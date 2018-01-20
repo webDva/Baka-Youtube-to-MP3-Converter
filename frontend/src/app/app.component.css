@@ -47,7 +47,7 @@ button:active {
     transition-duration: 0s;
 }
 
-p {
+p.text-description {
     margin: 0 auto;
     font-size: 1.5em;
     text-align: center;
@@ -123,13 +123,40 @@ textarea:focus, input:focus{
     animation: spin 2s linear infinite;
 }
 
+.about {
+    margin: 40px auto;
+    margin-bottom: 100px;
+    padding: 20px;
+
+    display: block;
+    max-width: 50%;
+
+    background-color: #f7d1c2;
+    border-radius: 10px;
+    border: 1px solid #e99445;
+    box-shadow: 3px 3px 10px rgba(255, 255, 255, 0.9);
+
+    font-family: system-ui, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.4;
+    font-size: 1.5em;
+    color: black;
+}
+
+a {
+    color: #3977a0;
+}
+
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 740px) {
     input {
         width: 80%;
+    }
+
+    .about {
+        max-width: 80%;
     }
 }
