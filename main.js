@@ -81,12 +81,13 @@ const app = express();
 app.use(cors()); // Needed for file sharing.
 // Needed for POST requests.
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use((req, res, next) => {
+    console.log("[REQUEST] " + req.headers.host + req.url)
     if (process.env.NODE_ENV === 'production') {
-        if (req.headers['x-forwarded-proto'] !== 'https')
-            return res.redirect('https://' + req.headers.host + req.url);
+        if (req.headers.host !== 'https://www.bakayoutube.com')
+            return res.redirect('https://www.bakayoutube.com' + req.url);
         else
             return next();
     } else
@@ -104,19 +105,22 @@ app.post('/convert/:videoId', (req, res) => {
     downloader.getMP3(req.params.videoId, (err, result) => {
         if (!res.headersSent) {
             if (err) {
-                res.send({'failed': true});
+                res.send({ 'failed': true });
+                console.log("[FAILURE] Failed to convert:\n" + "REQUEST URL: " + req.url + "\nYoutube MP3 Downloader ERR: " + err);
             } else {
                 res.send(result);
+                console.log("[SUCCESS] Converted: " + result.videoTitle);
             }
         }
     });
 });
 
 app.get('/download/:file', (req, res) => {
-    res.sendFile(req.params.file, {root: __dirname + '/videos/'}, function (err) {
+    res.sendFile(req.params.file, { root: __dirname + '/videos/' }, function (err) {
         // delete file once done to conserve space
         fs.unlinkSync(__dirname + '/videos/' + req.params.file);
     });
+    console.log("[SUCCESS] Sent .mp3: " + req.params.file);
 });
 
 /*
@@ -132,10 +136,10 @@ app.get('/', (req, res) => {
 });
 
 // Start the HTTP server.
-app.listen(port, (errorThatOccurs) => {
-    if (errorThatOccurs) {
-        return console.log('Something bad happened.', errorThatOccurs);
+app.listen(port, (err) => {
+    if (err) {
+        return console.log('[UNEXPECTED MISTAKE] Something bad happened: ', err);
     }
 
-    console.log(`Server running on port ${port}`);
+    console.log(`Backend running on port ${port}`);
 });
