@@ -8,9 +8,74 @@
 
 html, body {
     width: 100%;
-    height: 100%;
     padding: 0;
-    margin: 0;
+    margin: 0 auto;
     color: white;
     background-color: cornflowerblue;    
+}
+
+.site-head {
+    padding: 1.4rem 2rem;
+    text-align: center;
+    margin-top: 6rem;    
+}
+
+.site-head .title {
+    position: relative;
+    display: inline-block;
+    font-weight: 800;
+    font-size: 2.7em;
+    font-family: Verdana, Arial, sans-serif;
+}
+
+p.text-description {
+    margin: 0 auto;
+    font-size: 1.8em;
+    text-align: center;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+#value-container {
+
+}
+
+.row-1 {
+
+}
+
+.about {
+    margin: 40px auto;
+    margin-bottom: 100px;
+    padding: 20px;
+
+    display: block;
+    max-width: 50%;
+
+    background-color: #f7d1c2;
+    border-radius: 10px;
+    border: 1px solid #e99445;
+    box-shadow: 3px 3px 10px rgba(255, 255, 255, 0.9);
+
+    font-family: system-ui, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.4;
+    font-size: 1.5em;
+    color: black;
+}
+
+a {
+    color: #3977a0;
+}
+
+.ad-space {
+    
+}
+
+@media (max-width: 760px) {
+    .site-head {
+        margin-top: 4rem;    
+    }
+
+    .about {
+        max-width: 80%;
+    }
 }

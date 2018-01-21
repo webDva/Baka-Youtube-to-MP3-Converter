@@ -1,14 +1,11 @@
-.site-head {
-    padding: 1.4rem 2rem;
-    text-align: center;
-    margin-top: 6rem;
-    font-family: Verdana;
-}
-
-.site-head .title {
-    position: relative;
-    display: inline-block;
-    font-weight: 800;
+.main-content-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;    
+    
+    padding: 0;
+    margin: 0 auto;
 }
 
 input {
@@ -47,23 +44,10 @@ button:active {
     transition-duration: 0s;
 }
 
-p.text-description {
-    margin: 0 auto;
-    font-size: 1.5em;
-    text-align: center;
-}
-
 .results {
     font-size: 2em;
     font-family: monospace;
     margin-bottom: 3em;
-}
-
-.flexboxMe {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;    
 }
 
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
@@ -90,8 +74,7 @@ textarea:focus, input:focus{
 /* Popup container */
 .popup {
     position: relative;
-    cursor: pointer; 
-    margin: 4px auto;
+    margin: 0 auto;
     padding: 0;
     
     display: flex;
@@ -104,6 +87,7 @@ textarea:focus, input:focus{
 .popup .popuptext {
     visibility: hidden;
     background-color: #6d5e68;
+    margin: 6px auto;
     color: #fff;
     text-align: center;
     border-radius: 6px;
@@ -123,40 +107,13 @@ textarea:focus, input:focus{
     animation: spin 2s linear infinite;
 }
 
-.about {
-    margin: 40px auto;
-    margin-bottom: 100px;
-    padding: 20px;
-
-    display: block;
-    max-width: 50%;
-
-    background-color: #f7d1c2;
-    border-radius: 10px;
-    border: 1px solid #e99445;
-    box-shadow: 3px 3px 10px rgba(255, 255, 255, 0.9);
-
-    font-family: system-ui, "Segoe UI", Helvetica, Arial, sans-serif;
-    line-height: 1.4;
-    font-size: 1.5em;
-    color: black;
-}
-
-a {
-    color: #3977a0;
-}
-
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
 
-@media (max-width: 740px) {
+@media (max-width: 760px) {
     input {
         width: 80%;
-    }
-
-    .about {
-        max-width: 80%;
     }
 }

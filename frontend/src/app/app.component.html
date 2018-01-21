@@ -1,21 +1,9 @@
-<header class="site-head">
-    <h1 class="title">Baka Youtube to MP3 Converter!</h1>
-    <p class="text-description">🍩 Make an .mp3 from a Youtube video! 🍩</p>
-</header>
-<input class="flexboxMe" autofocus type="text" #box (keyup.enter)="convert(box.value)" placeholder="video url, e.g., https://www.youtube.com/watch?v=gvdf5n-zI14">
-<button class="flexboxMe" (click)="convert(box.value)">Download</button>
+<div class="main-content-container">
+    <input autofocus type="text" #box (keyup.enter)="convert(box.value)" placeholder="video url, e.g., https://www.youtube.com/watch?v=gvdf5n-zI14">
+    <button (click)="convert(box.value)">Download</button>
 
-<div class="flexboxMe results popup">
-    <span class='popuptext' id='message'>{{response}}</span>
-    <div class='loader' id='loading'></div>
-</div>
-
-<div class="about flexboxMe">
-    <h1>Help!</h1>
-    <p>I'm glad you asked, baka! Just enter the URL of the Youtube video that you would like to have converted to an .mp3 file and then hit that "Download" button! Your video will then be converted into an .mp3 file for you to use! やった！</p>
-    <h1>Legal</h1>
-    <p>Yeah, it's legal to download videos from Youtube for your personal needs, baka, like for when your internet isn't available or for adding songs to your music library.</p>
-    <p>And, Youtube, please don't bother me.</p>
-    <h1>Wha...?</h1>
-    <p>It's dva. My <a href="https://twitter.com/webDva">Twitter</a>.</p>
+    <div class="results popup">
+        <span class='popuptext' id='message'>{{response}}</span>
+        <div class='loader' id='loading'></div>
+    </div>
 </div>
