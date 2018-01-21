@@ -84,10 +84,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use((req, res, next) => {
-    console.log("[REQUEST] " + req.headers.host + req.url)
     if (process.env.NODE_ENV === 'production') {
-        if (req.headers.host !== 'https://www.bakayoutube.com')
-            return res.redirect('https://www.bakayoutube.com' + req.url);
+        if (req.headers['x-forwarded-proto'] !== 'https')
+            return res.redirect('https://' + req.headers.host + req.url);
         else
             return next();
     } else
