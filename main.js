@@ -85,10 +85,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use((req, res, next) => {
     if (process.env.NODE_ENV === 'production') {
-        if (req.headers['x-forwarded-proto'] !== 'https')
-            return res.redirect('https://' + req.headers.host + req.url);
-        else
-            return next();
+        return res.redirect('https://www.bakayoutube.com' + req.url);
     } else
         return next();
 });
@@ -105,7 +102,7 @@ app.post('/convert/:videoId', (req, res) => {
         if (!res.headersSent) {
             if (err) {
                 res.send({ 'failed': true });
-                console.log("[FAILURE] Failed to convert:\n" + "REQUEST URL: " + req.url + "\nYoutube MP3 Downloader ERR: " + err);
+                console.log("[FAILURE] Failed to convert. " + "REQUEST URL: " + req.url + "\nYoutube MP3 Downloader ERR: " + err);
             } else {
                 res.send(result);
                 console.log("[SUCCESS] Converted: " + result.videoTitle);
