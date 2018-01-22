@@ -1,6 +1,6 @@
 <div class="main-content-container">
     <input autofocus type="text" #box (keyup.enter)="convert(box.value)" placeholder="video url, e.g., https://www.youtube.com/watch?v=gvdf5n-zI14">
-    <button (click)="convert(box.value)">Download</button>
+    <button (click)="convert(box.value)">Convert</button>
 
     <div class="results popup">
         <span class='popuptext' id='message'>{{response}}</span>

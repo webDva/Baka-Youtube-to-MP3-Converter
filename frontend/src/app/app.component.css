@@ -27,21 +27,21 @@ button {
     font-size: 1.1em;
     font-weight: bold;
     color: white;
-    background-color: #FF7F50;
-    border: solid 3px #e57248;
-    border-radius: 4px;
-    transition-duration: 0.5s;
+    background-color: #ec5e3b;
+    border: solid 3px #ec5e3b;
+    border-radius: 6px;
+    letter-spacing: 0.5px;
+    transition-duration: 0.15s;
 }
 
 button:hover {
-    border: solid 3px chartreuse;
-    background-color: #4CAF50;
+    border-color: rgb(50, 156, 54);
+    background-color: rgb(50, 156, 54);
 }
 
 button:active {
-    background-color: cadetblue;
-    border-color: darkslateblue;
-    transition-duration: 0s;
+    border-color: rgb(25, 104, 27);
+    background-color: rgb(25, 104, 27);
 }
 
 .results {
