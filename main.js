@@ -99,30 +99,40 @@ app.use((req, res, next) => {
 const port = process.env.PORT || '3000';
 app.set('port', port);
 
-let videos = [];
-
 // convert youtube video to mp3
 
-app.post('/convert/:videoId', (req, res) => {
-    downloader.getMP3(req.params.videoId, (err, result) => {
+app.post('/convert/', (req, res) => {
+    downloader.getMP3(req.body.videoId, (err, result) => {
         if (!res.headersSent) {
             if (err) {
                 res.send({ 'failed': true });
-                console.log("[FAILURE] Failed to convert. " + "REQUEST URL: " + req.url + "\nYoutube MP3 Downloader ERR: " + err);
+                console.log("[FAILURE] Failed to convert: " + req.body.videoId + "\n[Youtube MP3 Downloader]: " + err);
             } else {
                 res.send(result);
-                console.log("[SUCCESS] Converted: " + result.videoTitle);
             }
         }
     });
 });
 
-app.get('/download/:file', (req, res) => {
-    res.sendFile(req.params.file, { root: __dirname + '/videos/' }, function (err) {
+app.post('/download/', (req, res) => {
+    res.sendFile(req.body.filename, { root: __dirname + '/videos/' }, function (err) {
         // delete file once done to conserve space
-        fs.unlinkSync(__dirname + '/videos/' + req.params.file);
+        fs.unlink(__dirname + '/videos/' + req.body.filename, (err) => {
+            if (err) {
+                res.send({ "failed": "nope.avi" });
+                // more than likely malformed logic of asking for file that doesn't exist
+                console.log("[ERROR] " + err);
+            } else
+                console.log("[SUCCESS] " + req.body.filename);
+        });
     });
-    console.log("[SUCCESS] Sent .mp3: " + req.params.file);
+});
+
+// error handling
+app.use(function (err, req, res, next) {
+    res.send({ "failed": "nope.avi" });
+    // more than likely malformed json
+    console.log("[ERROR] " + err);
 });
 
 /*

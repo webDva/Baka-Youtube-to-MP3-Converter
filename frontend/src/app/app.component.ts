@@ -1,8 +1,8 @@
 // ng build --prod --aot=false
 
-import {Component, OnInit} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {environment} from '../environments/environment';
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../environments/environment';
 
 import * as FileSaver from 'file-saver';
 
@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
         let match = videoURL.split("watch?v=")[1];
         this.doPopup(true);
         this.response = "Converting your video... baka!";
-        this.http.post(this.baseUrl + '/convert/' + match, null).subscribe(data => {
+        this.http.post(this.baseUrl + '/convert/', { "videoId": match }).subscribe(data => {
             if (data['failed']) {
 
                 this.doPopup();
@@ -30,7 +30,7 @@ export class AppComponent implements OnInit {
             else {
                 this.mp3Data = data;
                 this.doPopup(true);
-                this.response = this.mp3Data.videoTitle + ' has been converted into an .mp3, baka! Downloading right now...';
+                this.response = this.mp3Data.videoTitle + ' has been converted. Downloading right now...';
                 this.download(this.mp3Data.file);
             }
         },
@@ -41,8 +41,8 @@ export class AppComponent implements OnInit {
     }
 
     download(fileName: string) {
-        this.http.get(this.baseUrl + '/download/' + fileName.split("videos/")[1], {responseType: 'blob'}).subscribe(data => {
-            let blob = new Blob([data], {type: 'audio/mpeg'});
+        this.http.post(this.baseUrl + '/download/', { "filename": fileName.split("videos/")[1] }, { responseType: 'blob' }).subscribe(data => {
+            let blob = new Blob([data], { type: 'audio/mpeg' });
             FileSaver.saveAs(blob, this.mp3Data.videoTitle + '.mp3');
 
             this.doPopup();
@@ -66,7 +66,7 @@ export class AppComponent implements OnInit {
         }
     }
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) { }
 
     ngOnInit() {
         if (!environment.production) {
