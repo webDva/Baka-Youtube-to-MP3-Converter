@@ -139,9 +139,9 @@ app.use(function (err, req, res, next) {
         console.log("[TIMEDOUT] " + req.body.videoId);
         return res.send({ "failed": "timedout" });
     }
-    return res.send({ "failed": "nope.avi" });
     // more than likely malformed json
-    console.log("[ERROR] " + err);
+    console.log("[ERROR] " + err);    
+    return res.send({ "failed": "nope.avi" });
 });
 
 /*
