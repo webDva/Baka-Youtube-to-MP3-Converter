@@ -22,12 +22,14 @@ export class AppComponent implements OnInit {
         this.doPopup(true);
         this.response = "Converting your video... baka!";
         this.http.post(this.baseUrl + '/convert/', { "videoId": match }).subscribe(data => {
-            if (data['failed']) {  
+            if (data['failed']) {
                 this.doPopup();
                 if (data['failed'] == 'timedout')
-                    this.response = "The video took too long to convert! Kuso!";
+                    // video took too long, but it might can work again
+                    this.response = "The video took too long to convert, but please try again later!";
                 else
-                    this.response = 'Failed to convert your video! Baka!';
+                    // could be an unexepcted error or malformed input
+                    this.response = "Couldn't convert your video, but you can try again!";
             }
             else {
                 this.mp3Data = data;
