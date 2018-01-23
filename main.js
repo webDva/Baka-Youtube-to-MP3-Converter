@@ -5,6 +5,7 @@ let bodyParser = require('body-parser');
 let fs = require('fs');
 
 let YoutubeMp3Downloader = require("youtube-mp3-downloader");
+let timeout = require('connect-timeout')
 
 // First, delete all files in the videos directory except the .gitignore file
 fs.readdir('videos', function (err, files) {
@@ -101,12 +102,14 @@ app.set('port', port);
 
 // convert youtube video to mp3
 
-app.post('/convert/', (req, res) => {
+app.post('/convert/', timeout('300s'), (req, res, next) => {
+    if (!req.timedout) next();
+}, (req, res) => {
     downloader.getMP3(req.body.videoId, (err, result) => {
         if (!res.headersSent) {
             if (err) {
                 res.send({ 'failed': true });
-                console.log("[FAILURE] Failed to convert: " + req.body.videoId + "\n[Youtube MP3 Downloader]: " + err);
+                console.log("[CONVERT_FAILURE] " + req.body.videoId + "\n[Youtube MP3 Downloader]: " + err);
             } else {
                 res.send(result);
             }
@@ -119,9 +122,11 @@ app.post('/download/', (req, res) => {
         // delete file once done to conserve space
         fs.unlink(__dirname + '/videos/' + req.body.filename, (err) => {
             if (err) {
-                res.send({ "failed": "nope.avi" });
-                // more than likely malformed logic of asking for file that doesn't exist
-                console.log("[ERROR] " + err);
+                if (!res.headersSent) {
+                    res.send({ "failed": "nope.avi" });
+                    // more than likely malformed logic of asking for file that doesn't exist
+                    console.log("[ERROR] " + err);
+                }
             } else
                 console.log("[SUCCESS] " + req.body.filename);
         });
@@ -130,7 +135,11 @@ app.post('/download/', (req, res) => {
 
 // error handling
 app.use(function (err, req, res, next) {
-    res.send({ "failed": "nope.avi" });
+    if (req.timedout) {
+        console.log("[TIMEDOUT] " + req.body.videoId);
+        return res.send({ "failed": "timedout" });
+    }
+    return res.send({ "failed": "nope.avi" });
     // more than likely malformed json
     console.log("[ERROR] " + err);
 });

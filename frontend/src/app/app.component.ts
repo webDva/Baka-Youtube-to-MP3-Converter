@@ -12,7 +12,7 @@ import * as FileSaver from 'file-saver';
     styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-    response = 'Ready for conversion, senpai!';
+    response = '';
     mp3Data;
 
     baseUrl = '';
@@ -22,15 +22,17 @@ export class AppComponent implements OnInit {
         this.doPopup(true);
         this.response = "Converting your video... baka!";
         this.http.post(this.baseUrl + '/convert/', { "videoId": match }).subscribe(data => {
-            if (data['failed']) {
-
+            if (data['failed']) {  
                 this.doPopup();
-                this.response = 'Failed to convert your video! Baka!';
+                if (data['failed'] == 'timedout')
+                    this.response = "The video took too long to convert! Kuso!";
+                else
+                    this.response = 'Failed to convert your video! Baka!';
             }
             else {
                 this.mp3Data = data;
                 this.doPopup(true);
-                this.response = this.mp3Data.videoTitle + ' has been converted. Downloading right now...';
+                this.response = '"' + this.mp3Data.videoTitle + '" has been converted. Downloading right now...';
                 this.download(this.mp3Data.file);
             }
         },
