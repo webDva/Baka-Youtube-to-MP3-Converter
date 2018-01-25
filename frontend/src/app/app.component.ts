@@ -24,22 +24,19 @@ export class AppComponent implements OnInit {
         this.http.post(this.baseUrl + '/convert/', { "videoId": match }).subscribe(data => {
             if (data['failed']) {
                 this.doPopup();
-                if (data['failed'] == 'timedout')
-                    // video took too long, but it might can work again
-                    this.response = "The video took too long to convert, but please try again later!";
-                else
-                    // could be an unexepcted error or malformed input
-                    this.response = "Couldn't convert your video, but you can try again!";
+                // could be an unexepcted error or malformed input
+                this.response = "Couldn't convert your video, but you can try again!";
             }
             else {
                 this.mp3Data = data;
                 this.doPopup(true);
-                this.response = '"' + this.mp3Data.videoTitle + '" has been converted. Downloading right now...';
+                this.response = 'Downloading "' + this.mp3Data.videoTitle + '..."';
                 this.download(this.mp3Data.file);
             }
         },
             err => {
                 this.doPopup();
+                // for unexpected errors
                 this.response = "Something bad happened! Couldn't convert this video!";
             });
     }
@@ -50,7 +47,7 @@ export class AppComponent implements OnInit {
             FileSaver.saveAs(blob, this.mp3Data.videoTitle + '.mp3');
 
             this.doPopup();
-            this.response = "Done! Ready for another, baka!"
+            this.response = "Your video has been downloaded, baka!";
         },
             err => {
                 this.doPopup();

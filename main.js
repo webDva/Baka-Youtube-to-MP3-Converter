@@ -5,7 +5,6 @@ let bodyParser = require('body-parser');
 let fs = require('fs');
 
 let YoutubeMp3Downloader = require("youtube-mp3-downloader");
-let timeout = require('connect-timeout')
 
 // First, delete all files in the videos directory except the .gitignore file
 fs.readdir('videos', function (err, files) {
@@ -48,9 +47,6 @@ let Downloader = function () {
     });
 
     self.YD.on("error", function (error, data) {
-
-        // remove this in production/on launch
-        //console.error(error + " on videoId " + data.videoId);
 
         if (self.callbacks[data.videoId]) {
             self.callbacks[data.videoId](error, data);
@@ -101,10 +97,7 @@ const port = process.env.PORT || '3000';
 app.set('port', port);
 
 // convert youtube video to mp3
-
-app.post('/convert/', timeout('300s'), (req, res, next) => {
-    if (!req.timedout) next();
-}, (req, res) => {
+app.post('/convert/', (req, res) => {
     downloader.getMP3(req.body.videoId, (err, result) => {
         if (!res.headersSent) {
             if (err) {
@@ -117,6 +110,7 @@ app.post('/convert/', timeout('300s'), (req, res, next) => {
     });
 });
 
+// send requested .mp3 file to user
 app.post('/download/', (req, res) => {
     if (!res.headersSent) {
         res.sendFile(req.body.filename, { root: __dirname + '/videos/' }, function (err) {
@@ -134,10 +128,6 @@ app.post('/download/', (req, res) => {
 
 // error handling
 app.use(function (err, req, res, next) {
-    if (req.timedout) {
-        console.log("[TIMEDOUT] " + req.body.videoId);
-        return res.send({ "failed": "timedout" });
-    }
     // more than likely malformed json
     console.log("[ERROR] " + err);
     return res.send({ "failed": "nope.avi" });
