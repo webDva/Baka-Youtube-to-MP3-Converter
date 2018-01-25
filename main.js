@@ -118,19 +118,18 @@ app.post('/convert/', timeout('300s'), (req, res, next) => {
 });
 
 app.post('/download/', (req, res) => {
-    res.sendFile(req.body.filename, { root: __dirname + '/videos/' }, function (err) {
-        // delete file once done to conserve space
-        fs.unlink(__dirname + '/videos/' + req.body.filename, (err) => {
+    if (!res.headersSent) {
+        res.sendFile(req.body.filename, { root: __dirname + '/videos/' }, function (err) {
+            // no need to delete the file here since heroku restarts dynos every 24 hours
+            console.log("[SUCCESS] " + req.body.filename);
+
+            // standard error handling
             if (err) {
-                if (!res.headersSent) {
-                    res.send({ "failed": "nope.avi" });
-                    // more than likely malformed logic of asking for file that doesn't exist
-                    console.log("[ERROR] " + err);
-                }
-            } else
-                console.log("[SUCCESS] " + req.body.filename);
+                console.log("[ERROR] " + err);
+                res.send({ "failed": "file_error" });
+            }
         });
-    });
+    }
 });
 
 // error handling
@@ -140,7 +139,7 @@ app.use(function (err, req, res, next) {
         return res.send({ "failed": "timedout" });
     }
     // more than likely malformed json
-    console.log("[ERROR] " + err);    
+    console.log("[ERROR] " + err);
     return res.send({ "failed": "nope.avi" });
 });
 
