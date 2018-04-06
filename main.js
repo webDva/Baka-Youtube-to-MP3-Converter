@@ -80,14 +80,6 @@ app.use(cors()); // Needed for file sharing.
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use((req, res, next) => {
-    if (process.env.NODE_ENV === 'production') {
-        if (req.headers.host === 'baka-converter.herokuapp.com')
-            return res.redirect(301, 'http://www.bakayoutube.com');
-    } else
-        return next();
-});
-
 const port = process.env.PORT || '3000';
 app.set('port', port);
 
